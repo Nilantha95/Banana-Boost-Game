@@ -4,51 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monkey Catch Game</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #f0e68c;
-            text-align: center;
-        }
-        #gameCanvas {
-            background: url('jungle-background.jpg') no-repeat center center;
-            background-size: cover;
-            display: block;
-            margin: auto;
-            border: 2px solid #000;
-        }
-        .button {
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .play-btn { background-color: #ff4081; color: white; }
-        .play-btn:hover { background-color: #e91e63; }
-        .mute-btn { background-color: yellow; }
-        .monkey {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: url('monkey.png') no-repeat center center / contain;
-            left: 50px;
-            top: 80%;
-            transition: top 0.5s ease-in-out, left 1s ease-in-out;
-            cursor: pointer;
-        }
-        .jump {
-            animation: jump 0.5s ease-out;
-        }
-        @keyframes jump {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-50px); }
-            100% { transform: translateY(0); }
-        }
-    </style>
+    <link rel="stylesheet" href="Startscreen.css">
 </head>
 <body>
     <h1>Monkey Catch Game</h1>
@@ -59,84 +15,6 @@
     <audio id="bgMusic" loop>
         <source src="background-music.mp3" type="audio/mpeg">
     </audio>
-    <script>
-        let canvas = document.getElementById('gameCanvas');
-        let ctx = canvas.getContext('2d');
-        let monkey = { x: 350, y: 400, width: 100, height: 100 };
-        let bananas = [];
-        let score = 0;
-        let gameRunning = false;
-
-        function startGame() {
-            gameRunning = true;
-            bananas = [];
-            score = 0;
-            requestAnimationFrame(updateGame);
-        }
-        
-        function updateGame() {
-            if (!gameRunning) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'brown';
-            ctx.fillRect(monkey.x, monkey.y, monkey.width, monkey.height);
-            
-            if (Math.random() < 0.05) {
-                bananas.push({ x: Math.random() * (canvas.width - 30), y: 0, width: 30, height: 30 });
-            }
-            
-            bananas.forEach((banana, index) => {
-                banana.y += 5;
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(banana.x, banana.y, banana.width, banana.height);
-                if (banana.y > canvas.height) bananas.splice(index, 1);
-                if (
-                    banana.x < monkey.x + monkey.width &&
-                    banana.x + banana.width > monkey.x &&
-                    banana.y < monkey.y + monkey.height &&
-                    banana.y + banana.height > monkey.y
-                ) {
-                    bananas.splice(index, 1);
-                    score++;
-                }
-            });
-            ctx.fillStyle = 'black';
-            ctx.fillText('Score: ' + score, 20, 30);
-            requestAnimationFrame(updateGame);
-        }
-        
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'ArrowLeft' && monkey.x > 0) monkey.x -= 20;
-            if (event.key === 'ArrowRight' && monkey.x < canvas.width - monkey.width) monkey.x += 20;
-        });
-        
-        function toggleMusic() {
-            let music = document.getElementById('bgMusic');
-            if (music.paused) music.play();
-            else music.pause();
-        }
-        
-        function moveMonkey() {
-            let monkeyElement = document.querySelector('.monkey');
-            let screenWidth = window.innerWidth - 100;
-            let screenHeight = window.innerHeight - 100;
-
-            setInterval(() => {
-                let randomX = Math.random() * screenWidth;
-                let randomY = Math.random() * (screenHeight - 100) + 50;
-                monkeyElement.style.left = `${randomX}px`;
-                monkeyElement.style.top = `${randomY}px`;
-            }, 3000);
-        }
-
-        function monkeyJump() {
-            let monkeyElement = document.querySelector('.monkey');
-            monkeyElement.classList.add('jump');
-            setTimeout(() => {
-                monkeyElement.classList.remove('jump');
-            }, 500);
-        }
-
-        window.onload = moveMonkey;
-    </script>
+    <script src="Startscreen.js"></script>
 </body>
 </html>
