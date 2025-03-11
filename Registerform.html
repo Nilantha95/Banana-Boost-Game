@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: url('Images/signpic.webp') no-repeat center center fixed; /* Replace with your image path */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            backdrop-filter: blur(5px);
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 239, 98, 0.8); /* Yellowish background color */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff4081;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #e91e63;
+        }
+
+        /* Button container */
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center buttons horizontally */
+            gap: 10px; /* Space between buttons */
+        }
+
+        /* Small button styling */
+        .small-button {
+            background-color: #ff4081;
+            color: white;
+            padding: 15px 25px; /* Increased padding */
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em; /* Increased font size */
+            transition: 0.3s;
+        }
+
+        .small-button:hover {
+            background-color: #e91e63;
+        }
+
+        /* Animation styles */
+        .animated-title {
+            font-size: 3em;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .animated-title span {
+            display: inline-block;
+            position: relative;
+            animation: slideIn 2s ease-in-out forwards;
+            animation-delay: calc(0.5s * var(--i));
+            opacity: 0;
+            color: rgba(0, 0, 0, 0.877);
+            text-shadow: -1px -1px 0 rgb(234, 219, 19), 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+            transform: translateZ(-100px) rotateY(-20deg);
+        }
+
+        @keyframes slideIn {
+            to {
+                left: 0;
+                opacity: 1;
+                transform: translateZ(0) rotateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-title">
+        <span style="--i:0">BANANA</span>
+        <span style="--i:1">CATCH</span>
+        <span style="--i:2">GAME</span>
+    </div>
+
+    <div class="container">
+        <h2>Register</h2>
+        <form>
+            <input type="text" id="nickname" placeholder="Enter your nickname" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <div class="button-container">
+                <button type="submit" class="small-button">Register</button>
+                <button type="button" onclick="location.href='signin.html'" class="small-button">Sign In</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
