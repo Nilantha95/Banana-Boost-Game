@@ -5,6 +5,13 @@ let canvas = document.getElementById('gameCanvas');
         let score = 0;
         let gameRunning = false;
 
+        // Preload the banana image
+        let bananaImage = new Image();
+        bananaImage.src="../Images/banana.png"; // Replace with the actual path to your image
+
+        let monkeyImage = new Image();
+        monkeyImage.src = '../Images/monkey.png';
+
         function startGame() {
             gameRunning = true;
             bananas = [];
@@ -15,17 +22,16 @@ let canvas = document.getElementById('gameCanvas');
         function updateGame() {
             if (!gameRunning) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'brown';
-            ctx.fillRect(monkey.x, monkey.y, monkey.width, monkey.height);
+            ctx.drawImage(monkeyImage, monkey.x, monkey.y, monkey.width, monkey.height);
             
             if (Math.random() < 0.05) {
-                bananas.push({ x: Math.random() * (canvas.width - 30), y: 0, width: 30, height: 30 });
+                bananas.push({ x: Math.random() * (canvas.width - 30), y: 0, width: 60, height: 60 });
             }
             
             bananas.forEach((banana, index) => {
                 banana.y += 5;
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect(banana.x, banana.y, banana.width, banana.height);
+                // Draw the banana image instead of the yellow rectangle
+                ctx.drawImage(bananaImage, banana.x, banana.y, banana.width, banana.height);
                 if (banana.y > canvas.height) bananas.splice(index, 1);
                 if (
                     banana.x < monkey.x + monkey.width &&
