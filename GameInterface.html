@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monkey Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('Imagefiles_Interface/Monkey_main.webp');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .monkey-frame {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+        
+        .monkey {
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .leaves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            z-index: 0;
+        }
+        
+        .top-leaves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .bottom-leaves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .game-button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 3px solid #7b3f00;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .game-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        }
+        
+        .play-button {
+            background-color: #ff3399;
+            color: white;
+        }
+        
+        .leaderboard-button {
+            background-color: #ffaa00;
+            color: #6b4423;
+        }
+        
+        .about-button {
+            background-color: #cd8c52;
+            background-image: url('wood-texture.png');
+            color: #5e2c04;
+        }
+        
+        .quit-button {
+            background-color: #f7d795;
+            color: white;
+        }
+        
+        .music-button {
+            background-color: #ffff00;
+            width: 60%;
+            margin: 50px auto 0;
+            border-radius: 8px;
+            padding: 15px 0;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 3px solid #7b3f00;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .music-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        }
+        
+        .music-button.muted {
+            background-color: #cccc00;
+        }
+        
+        .monkey-character {
+            width: 300px;
+            height: 350px;
+            background-image: url('monkey-character.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="leaves">
+            <div class="top-leaves">
+                <!-- Green leaves at the top would be images here -->
+            </div>
+            <div class="bottom-leaves">
+                <!-- Green leaves at the bottom would be images here -->
+            </div>
+        </div>
+        
+        <div class="monkey-frame">
+            <div class="monkey-character">
+                <!-- This div would have the monkey character as a background image -->
+            </div>
+            
+            <div class="button-container">
+                <div class="game-button play-button">PLAY</div>
+                <div class="game-button leaderboard-button">Leaderboard</div>
+                <div class="game-button about-button">ABOUT ME</div>
+                <div class="game-button quit-button">Quit</div>
+            </div>
+        </div>
+        
+        <div id="musicButton" class="music-button">Play Music</div>
+    </div>
+    
+    <!-- Audio element for background music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Music/Menu_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // Get references to DOM elements
+        const musicButton = document.getElementById('musicButton');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        
+        // Initialize music state
+        let isMusicPlaying = false;
+        
+        // Add click event listener to music button
+        musicButton.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                // If music is playing, pause it
+                backgroundMusic.pause();
+                musicButton.textContent = 'Play Music';
+                musicButton.classList.remove('muted');
+            } else {
+                // If music is paused, play it
+                backgroundMusic.play()
+                    .then(() => {
+                        // Playback started successfully
+                    })
+                    .catch(error => {
+                        console.error('Error playing audio:', error);
+                        // Most browsers require user interaction before playing audio
+                        alert('Please interact with the page first to enable audio');
+                    });
+                musicButton.textContent = 'Mute Music';
+                musicButton.classList.add('muted');
+            }
+            
+            // Toggle the music state
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
+        // Main menu button event listeners could be added here
+        document.querySelector('.play-button').addEventListener('click', function() {
+            console.log('Play button clicked');
+            // Add game start logic here
+        });
+        
+        document.querySelector('.leaderboard-button').addEventListener('click', function() {
+            console.log('Leaderboard button clicked');
+            // Show leaderboard logic here
+        });
+        
+        document.querySelector('.about-button').addEventListener('click', function() {
+            console.log('About button clicked');
+            // Show about information logic here
+        });
+        
+        document.querySelector('.quit-button').addEventListener('click', function() {
+            console.log('Quit button clicked');
+            // Quit game logic here
+        });
+    </script>
+</body>
+</html>
