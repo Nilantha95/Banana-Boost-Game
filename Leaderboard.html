@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Leaderboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('Imagefiles_Interface/Monkey_main.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .leaderboard-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(235, 241, 113, 0.918); /* Semi-transparent container instead */
+            border-radius: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 50px;
+            transition: transform 0.2s;
+        }
+        
+        .leaderboard-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-info {
+            flex-grow: 1;
+        }
+        
+        .username {
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .score {
+            font-weight: 600;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        /* Gradient backgrounds for each position */
+        .position-1 {
+            background: linear-gradient(90deg, #ff4d4d 0%, #f86161 100%);
+        }
+        
+        .position-2 {
+            background: linear-gradient(90deg, #ff7e33 0%, #ffb366 100%);
+        }
+        
+        .position-3 {
+            background: linear-gradient(90deg, #ffb347 0%, #ffdf7e 100%);
+        }
+        
+        .position-4 {
+            background: linear-gradient(90deg, #da70d6 0%, #e29fe2 100%);
+        }
+        
+        .position-5 {
+            background: linear-gradient(90deg, #9370db 0%, #b19cd9 100%);
+        }
+        
+        /* Music toggle button styles */
+        .music-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .music-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        
+        .music-toggle.playing {
+            background: rgba(255, 77, 77, 0.6);
+        }
+        
+        /* Adjust for mobile */
+        @media (max-width: 600px) {
+            .leaderboard-container {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+            
+            .music-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <button class="music-toggle" id="musicToggle" aria-label="Toggle background music">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="musicIcon">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+        </button>
+        
+        
+        <h1 class="title">Banana Catch Game</h1>
+        
+        
+        <div class="leaderboard-list">
+            <div class="leaderboard-item position-1">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike90">
+                </div>
+                <div class="user-info">
+                    <div class="username">Mike90</div>
+                    <div class="score">560</div>
+                </div>
+            </div>
+            
+            <div class="leaderboard-item position-2">
+                <div class="avatar">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub-FYI">
+                </div>
+                <div class="user-info">
+                    <div class="username">GitHub-FYI</div>
+                    <div class="score">532</div>
+                </div>
+            </div>
+            
+            <div class="leaderboard-item position-3">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User-919">
+                </div>
+                <div class="user-info">
+                    <div class="username">User-919</div>
+                    <div class="score">415</div>
+                </div>
+            </div>
+            
+            <div class="leaderboard-item position-4">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Kelsey8771">
+                </div>
+                <div class="user-info">
+                    <div class="username">Kelsey8771</div>
+                    <div class="score">334</div>
+                </div>
+            </div>
+            
+            <div class="leaderboard-item position-5">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Damon">
+                </div>
+                <div class="user-info">
+                    <div class="username">Damon</div>
+                    <div class="score">162</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicToggle = document.getElementById('musicToggle');
+            const musicIcon = document.getElementById('musicIcon');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            let isPlaying = false;
+            
+            // SVG paths for music icon states
+            const playIcon = "M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z";
+            const pauseIcon = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+            
+            // Initialize music volume
+            backgroundMusic.volume = 0.5;
+            
+            musicToggle.addEventListener('click', function() {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    musicIcon.innerHTML = `<path d="${playIcon}"/>`;
+                    musicToggle.classList.remove('playing');
+                } else {
+                    // Only play if user has interacted with the page
+                    const playPromise = backgroundMusic.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            musicIcon.innerHTML = `<path d="${pauseIcon}"/>`;
+                            musicToggle.classList.add('playing');
+                        })
+                        .catch(error => {
+                            console.log('Auto-play was prevented. User needs to interact with the document first.');
+                        });
+                    }
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>
