@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('Imagefiles_Interface/Monkey_main.webp');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.monkey-frame {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.monkey {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.leaves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 0;
+}
+
+.top-leaves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.bottom-leaves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.game-button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 3px solid #7b3f00;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
+
+.play-button {
+    background-color: #ff3399;
+    color: white;
+}
+
+.leaderboard-button {
+    background-color: #ffaa00;
+    color: #6b4423;
+}
+
+.about-button {
+    background-color: #cd8c52;
+    background-image: url('wood-texture.png');
+    color: #5e2c04;
+}
+
+.quit-button {
+    background-color: #f7d795;
+    color: white;
+}
+
+.music-button {
+    background-color: #ffff00;
+    width: 60%;
+    margin: 50px auto 0;
+    border-radius: 8px;
+    padding: 15px 0;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 3px solid #7b3f00;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.music-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
+
+.music-button.muted {
+    background-color: #cccc00;
+}
+
+.monkey-character {
+    width: 300px;
+    height: 350px;
+    background-image: url('monkey-character.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Updated styles for the animated heading */
+.game-heading {
+    position: relative;
+    font-size: 28px; /* Reduced font size */
+    font-weight: bold;
+    color: #180e07;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+    z-index: 3;
+    text-align: center;
+    padding: 10px 15px; /* Increased horizontal padding */
+    background-color: rgba(221, 7, 7, 0.3);
+    border-radius: 10px;
+    border: 3px solid #7b3f00;
+    width: 90%; /* Reduced from 100% to ensure padding works properly */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden; /* Changed from visible to hidden to prevent overflow */
+    letter-spacing: -0.5px; /* Slightly reduce spacing between letters */
+}
+
+.heading-character {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.heading-character.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
