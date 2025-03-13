@@ -10,11 +10,28 @@
     <h1>Monkey Catch Game</h1>
     <button class="button play-btn" onclick="startGame()">Play</button>
     <button class="button mute-btn" onclick="toggleMusic()">Mute Music</button>
-    <canvas id="gameCanvas" width="800" height="500"></canvas>
+
+    <div class="game-container">
+        <div class="user-profile">
+            <h2>User Profile</h2>
+            <p>Name: Player 1</p>
+            <p>Score: <span id="userScore">0</span></p>
+        </div>
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+        <div class="life-display">
+            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart1">
+            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart2">
+            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart3">
+        </div>
+    </div>
+
     <div class="monkey" onclick="monkeyJump()"></div>
     <audio id="bgMusic" loop>
         <source src="Music_File/02. Main Menu 1.mp3" type="audio/mpeg">
     </audio>
+
+    <button id="nextButton" class="button" style="display: none;" onclick="navigateToMathGame()">Next</button>
+
     <script src="Startscreen.js"></script>
 </body>
 </html>
