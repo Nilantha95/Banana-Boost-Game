@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monkey Game</title>
+    <link rel="stylesheet" href="GameInterface.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="game-heading" id="gameHeading">
+            <span class="heading-character">B</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">n</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">n</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character"> </span>
+            <span class="heading-character">C</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">t</span>
+            <span class="heading-character">c</span>
+            <span class="heading-character">h</span>
+            <span class="heading-character"> </span>
+            <span class="heading-character">G</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">m</span>
+            <span class="heading-character">e</span>
+        </h1>
+        
+        <div class="leaves">
+            <div class="top-leaves">
+                <!-- Green leaves at the top would be images here -->
+            </div>
+            <div class="bottom-leaves">
+                <!-- Green leaves at the bottom would be images here -->
+            </div>
+        </div>
+        
+        <div class="monkey-frame">
+            <div class="monkey-character">
+                <!-- This div would have the monkey character as a background image -->
+            </div>
+            
+            <div class="button-container">
+                <div class="game-button play-button">PLAY</div>
+                <div class="game-button leaderboard-button">Leaderboard</div>
+                <div class="game-button about-button">ABOUT ME</div>
+                <div class="game-button quit-button">Quit</div>
+            </div>
+        </div>
+        
+        <div id="musicButton" class="music-button">Play Music</div>
+    </div>
+    
+    <!-- Audio element for background music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Music/Menu_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script src="GameInterface.js"></script>
+</body>
+</html>
