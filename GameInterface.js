@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Make sure the quit button has the event listener (in case DOM loads after the earlier code)
     if (quitButton) {
         quitButton.addEventListener('click', function() {
-            window.location.href = 'signin.html';
+            window.location.href = 'SignIn.html';
         });
     }
 });
