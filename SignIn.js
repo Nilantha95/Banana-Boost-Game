@@ -74,3 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
+
+// Animate the heading with letters appearing one by one
+document.addEventListener('DOMContentLoaded', function() {
+    const headingCharacters = document.querySelectorAll('.heading-character');
+    const animationDelay = 150; // milliseconds between each character
+
+    headingCharacters.forEach((char, index) => {
+        setTimeout(() => {
+            char.classList.add('visible');
+        }, index * animationDelay);
+    });
+});

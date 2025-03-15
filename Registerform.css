@@ -77,30 +77,37 @@ button:hover {
     background-color: #e91e63;
 }
 
-/* Animation styles */
-.animated-title {
-    font-size: 3em;
+/* Updated styles for the animated heading */
+.game-heading {
+    position: relative;
+    font-size: 28px; /* Reduced font size */
+    font-weight: bold;
+    color: #180e07;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+    z-index: 3;
+    text-align: center;
+    padding: 10px 15px; /* Increased horizontal padding */
+    background-color: rgba(221, 214, 7, 0.8);
+    border-radius: 10px;
+    border: 3px solid #7b3f00;
+    width: 90%; /* Reduced from 100% to ensure padding works properly */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
     white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    perspective: 1000px;
+    overflow: hidden; /* Changed from visible to hidden to prevent overflow */
+    letter-spacing: -0.5px; /* Slightly reduce spacing between letters */
 }
 
-.animated-title span {
+.heading-character {
     display: inline-block;
-    position: relative;
-    animation: slideIn 2s ease-in-out forwards;
-    animation-delay: calc(0.5s * var(--i));
     opacity: 0;
-    color: rgba(0, 0, 0, 0.877);
-    text-shadow: -1px -1px 0 rgb(234, 219, 19), 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
-    transform: translateZ(-100px) rotateY(-20deg);
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
-@keyframes slideIn {
-    to {
-        left: 0;
-        opacity: 1;
-        transform: translateZ(0) rotateY(0);
-    }
+.heading-character.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
