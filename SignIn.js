@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("User signed in:", user.uid);
                 
                 // Redirect to the game page
-                window.location.href = 'game.html';
+                window.location.href = 'GameInterface.html';
             })
             .catch((error) => {
                 // Handle errors
