@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="Registerform.css";>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="Registerform.css">
 </head>
 <body>
     <div class="animated-title">
@@ -16,20 +12,26 @@
         <span style="--i:1">CATCH</span>
         <span style="--i:2">GAME</span>
     </div>
-
+    
     <div class="container">
         <h2>Register</h2>
-        <form>
+        <form id="registerForm">
             <input type="text" id="nickname" placeholder="Enter your nickname" required>
             <input type="email" id="email" placeholder="Enter your email" required>
             <input type="password" id="password" placeholder="Enter your password" required>
+            <div id="errorMessage" class="error-message"></div>
             <div class="button-container">
                 <button type="submit" class="small-button">Register</button>
                 <button type="button" onclick="location.href='signin.html'" class="small-button">Sign In</button>
             </div>
         </form>
     </div>
-
+    
+    <!-- Firebase SDK scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
     <script src="Registerform.js"></script>
 </body>
 </html>
