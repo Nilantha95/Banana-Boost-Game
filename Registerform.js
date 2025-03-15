@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(() => {
                     console.log("User data successfully added to Firestore!");
                     alert('Registration successful!');
-                    window.location.href = 'game.html'; // Redirect to game page
+                    window.location.href = 'SignIn.html'; // Redirect to game page
                 })
                 .catch((error) => {
                     // Handle errors
