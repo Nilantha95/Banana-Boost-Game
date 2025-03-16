@@ -2,6 +2,8 @@
 const musicButton = document.getElementById('musicButton');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const quitButton = document.querySelector('.quit-button');
+const leaderboardButton = document.querySelector('.leaderboard-button');
+
 
 // Initialize music state
 let isMusicPlaying = false; // Music starts paused
@@ -29,6 +31,11 @@ musicButton.addEventListener('click', function() {
     
     // Toggle the music state
     isMusicPlaying = !isMusicPlaying;
+});
+
+leaderboardButton.addEventListener('click', function() {
+    // Navigate to the leaderboard page
+    window.location.href = 'NewLeaderboard.html';
 });
 
 // Add click event listener to quit button

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banana Catch Game - Leaderboard</title>
+    <link rel="stylesheet" href="NewLeaderboard.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="game-heading" id="gameHeading">
+            <span class="heading-character">L</span>
+            <span class="heading-character">e</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">d</span>
+            <span class="heading-character">e</span>
+            <span class="heading-character">r</span>
+            <span class="heading-character">b</span>
+            <span class="heading-character">o</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">r</span>
+            <span class="heading-character">d</span>
+        </h1>
+        
+        <div class="leaderboard-container">
+            <div class="leaderboard-table">
+                <!-- Gold Medal - 1st Place -->
+                <div class="player-row first-place">
+                    <div class="medal-container">
+                        <div class="medal gold"></div>
+                    </div>
+                    <div class="player-avatar"></div>
+                    <div class="player-info">
+                        <div class="player-name">Player Name</div>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                    </div>
+                    <div class="player-score">2500</div>
+                </div>
+                
+                <!-- Silver Medal - 2nd Place -->
+                <div class="player-row second-place">
+                    <div class="medal-container">
+                        <div class="medal silver"></div>
+                    </div>
+                    <div class="player-avatar"></div>
+                    <div class="player-info">
+                        <div class="player-name">Player Name</div>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="player-score">2449</div>
+                </div>
+                
+                <!-- Bronze Medal - 3rd Place -->
+                <div class="player-row third-place">
+                    <div class="medal-container">
+                        <div class="medal bronze"></div>
+                    </div>
+                    <div class="player-avatar"></div>
+                    <div class="player-info">
+                        <div class="player-name">Player Name</div>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="player-score">2400</div>
+                </div>
+                
+                <!-- Regular Players - 4th Place and below -->
+                <div class="player-row">
+                    <div class="medal-container">
+                        <div class="rank">4</div>
+                    </div>
+                    <div class="player-avatar"></div>
+                    <div class="player-info">
+                        <div class="player-name">Player Name</div>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="player-score">2000</div>
+                </div>
+                
+                <div class="player-row">
+                    <div class="medal-container">
+                        <div class="rank">5</div>
+                    </div>
+                    <div class="player-avatar"></div>
+                    <div class="player-info">
+                        <div class="player-name">Player Name</div>
+                        <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="player-score">1950</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <div class="game-button back-button">Back to Menu</div>
+            <div class="game-button play-again-button">Play Again</div>
+        </div>
+    </div>
+    
+    <!-- Audio element for background music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Music/Menu_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script src="NewLeaderboard.js"></script>
+</body>
+</html>
