@@ -55,7 +55,7 @@ function updateGame() {
 }
 
 function startTimer() {
-    timeRemaining = 10; // Reset the timer here
+    timeRemaining = 30; // Reset the timer here
     timer = setInterval(() => {
         timeRemaining--;
         if (timeRemaining <= 0) {
@@ -65,9 +65,10 @@ function startTimer() {
             }
             if (lives > 0) {
                 startGame();
-            } else {
+            }  else {
                 gameRunning = false;
                 alert("Game Over!");
+                window.location.href = "BananaAPIgame.html";
             }
         }
     }, 1000);
