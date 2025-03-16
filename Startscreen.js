@@ -55,7 +55,7 @@ function updateGame() {
 }
 
 function startTimer() {
-    timeRemaining = 30; // Reset the timer here
+    timeRemaining = 15; // Reset the timer here
     timer = setInterval(() => {
         timeRemaining--;
         if (timeRemaining <= 0) {

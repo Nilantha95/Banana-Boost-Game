@@ -6,7 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('Images/pic1.webp'); /* Assuming the image is in an 'images' folder */
+    background-image: url('Images/pic1.webp');
     background-size: cover;
     background-repeat: no-repeat;
 }
