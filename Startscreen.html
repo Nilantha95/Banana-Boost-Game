@@ -4,7 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monkey Catch Game</title>
-    <link rel="stylesheet" href="Startscreen.css">
+    <style>
+        body {
+            background: url('Images/pic1.webp') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .user-profile {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-right: 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            margin-left: 100px;
+        }
+
+        .user-profile h2 {
+            display: none;
+        }
+
+        #gameCanvas {
+            background-color: #8FBC8F;
+            display: block;
+            border: 2px solid #000;
+            width: 800px;
+            height: 500px;
+            margin: 0 auto 0 0;
+            margin-left: 110px;
+        }
+
+        .life-display {
+            display: flex;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        .life-display img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .play-btn { background-color: #ff4081; color: white; }
+        .play-btn:hover { background-color: #e91e63; }
+        .mute-btn { background-color: yellow; }
+
+        .monkey {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('monkey.png') no-repeat center center / contain;
+            left: 50px;
+            top: 80%;
+            transition: top 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .jump {
+            animation: jump 0.5s ease-out;
+        }
+
+        @keyframes jump {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <h1>Monkey Catch Game</h1>
@@ -13,16 +103,16 @@
 
     <div class="game-container">
         <div class="user-profile">
-            <h2>User Profile</h2>
-            <p>Name: Player 1</p>
+            <h2></h2>
+            <div class="life-display">
+                <p>Lives: <span id="lives"></span></p>
+            </div>
+            <p id="playerName">Name: Player 1</p>
             <p>Score: <span id="userScore">0</span></p>
+            <p>Round: <span id="roundNumber">1</span>/3</p>
+            <p>Target: <span id="targetScore">50</span></p>
         </div>
         <canvas id="gameCanvas" width="800" height="500"></canvas>
-        <div class="life-display">
-            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart1">
-            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart2">
-            <img src="Images/heart01.png" alt="Heart" class="life-heart" id="heart3">
-        </div>
     </div>
 
     <div class="monkey" onclick="monkeyJump()"></div>
@@ -32,6 +122,256 @@
 
     <button id="nextButton" class="button" style="display: none;" onclick="navigateToMathGame()">Next</button>
 
-    <script src="Startscreen.js"></script>
+    <script>
+        let canvas = document.getElementById('gameCanvas');
+        let ctx = canvas.getContext('2d');
+        let monkey = { x: 350, y: 400, width: 100, height: 100 };
+        let bananas = [];
+        let score = 0;
+        let totalScore = 0;
+        let gameRunning = false;
+        let lives = 3;
+        let timer;
+        let timeRemaining = 15;
+        const heartImageSrc = "Images/heart01.png";
+        const heartSymbol = "❤️";
+        let playerName = "Player 1";
+        let currentRound = 1;
+        let bananaSpeed = 5;
+        let bananaSpawnRate = 0.05;
+        
+        // Round settings
+        const rounds = [
+            { time: 15, target: 50, speed: 5, spawnRate: 0.05 },
+            { time: 12, target: 70, speed: 7, spawnRate: 0.07 },
+            { time: 10, target: 100, speed: 9, spawnRate: 0.09 }
+        ];
+
+        let bananaImage = new Image();
+        bananaImage.src = "Images/banana.png";
+
+        let monkeyImage = new Image();
+        monkeyImage.src = 'Images/monkey.png';
+
+        // Heart image error handling
+        let heartImage = new Image();
+        heartImage.src = heartImageSrc;
+        let useHeartSymbol = false;
+        
+        heartImage.onerror = function() {
+            useHeartSymbol = true;
+            updateLivesDisplay();
+        };
+        
+        // Initialize the game when page loads
+        window.onload = function() {
+            updateLivesDisplay();
+            updateScoreDisplay();
+            updateRoundDisplay();
+        };
+
+        function startGame() {
+            if (timer) clearInterval(timer);
+            
+            gameRunning = true;
+            bananas = [];
+            score = 0;
+            
+            // Only reset lives and round if starting a new game after game over
+            if (lives <= 0) {
+                lives = 3;
+                currentRound = 1;
+                totalScore = 0;
+            }
+            
+            // Set difficulty based on current round
+            const roundSettings = rounds[currentRound - 1];
+            timeRemaining = roundSettings.time;
+            bananaSpeed = roundSettings.speed;
+            bananaSpawnRate = roundSettings.spawnRate;
+            
+            updateScoreDisplay();
+            updateLivesDisplay();
+            updateRoundDisplay();
+            startTimer();
+            requestAnimationFrame(updateGame);
+        }
+
+        function updateRoundDisplay() {
+            document.getElementById('roundNumber').textContent = currentRound;
+            document.getElementById('targetScore').textContent = rounds[currentRound - 1].target;
+        }
+
+        function updateGame() {
+            if (!gameRunning) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(monkeyImage, monkey.x, monkey.y, monkey.width, monkey.height);
+
+            // Spawn bananas based on current round's spawn rate
+            if (Math.random() < bananaSpawnRate) {
+                bananas.push({ x: Math.random() * (canvas.width - 30), y: 0, width: 60, height: 60 });
+            }
+
+            bananas.forEach((banana, index) => {
+                banana.y += bananaSpeed; // Use round-specific speed
+                ctx.drawImage(bananaImage, banana.x, banana.y, banana.width, banana.height);
+                
+                // Remove bananas that fall off the bottom
+                if (banana.y > canvas.height) {
+                    bananas.splice(index, 1);
+                    return;
+                }
+                
+                // Check for collision
+                if (
+                    banana.x < monkey.x + monkey.width &&
+                    banana.x + banana.width > monkey.x &&
+                    banana.y < monkey.y + monkey.height &&
+                    banana.y + banana.height > monkey.y
+                ) {
+                    bananas.splice(index, 1);
+                    score++;
+                    totalScore++;
+                    updateScoreDisplay();
+                }
+            });
+
+            // Display time remaining and round info
+            ctx.fillStyle = 'black';
+            ctx.font = '24px Arial';
+            ctx.fillText('Time: ' + timeRemaining, 20, 30);
+            ctx.fillText('Round: ' + currentRound + '/3', 20, 60);
+            ctx.fillText('Target: ' + rounds[currentRound - 1].target, 20, 90);
+            ctx.fillText('Current: ' + score, 20, 120);
+            ctx.fillText('Total: ' + totalScore, 20, 150);
+            
+            if (gameRunning) {
+                requestAnimationFrame(updateGame);
+            }
+        }
+
+        function startTimer() {
+            if (timer) clearInterval(timer);
+            
+            const roundSettings = rounds[currentRound - 1];
+            timeRemaining = roundSettings.time;
+            
+            timer = setInterval(() => {
+                timeRemaining--;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timer);
+                    gameRunning = false; // Stop the game
+                    
+                    console.log("Time's up! Round:", currentRound, "Score:", score, "Total:", totalScore);
+                    
+                    // Check if player met the target for this round
+                    const targetScore = rounds[currentRound - 1].target;
+                    
+                    if (totalScore < targetScore) {
+                        console.log("Did not meet target score, losing a life. Lives before:", lives);
+                        
+                        loseLife();
+                        
+                        console.log("Lives after reduction:", lives);
+                        
+                        if (lives > 0) {
+                            // Show message and restart the same round after delay
+                            displayMessage(`Time's up! Target not met. -1 Life`, 2000, () => {
+                                startGame();
+                            });
+                        } else {
+                            // Game over
+                            displayMessage('GAME OVER!', 2000, () => {
+                                alert("Game Over!");
+                                window.location.href = "BananaAPIgame.html";
+                            });
+                        }
+                    } else {
+                        // Target met, advance to next round or win
+                        if (currentRound < 3) {
+                            currentRound++;
+                            displayMessage(`Round ${currentRound-1} Complete!`, 2000, () => {
+                                startGame();
+                            });
+                        } else {
+                            // Game win - completed all 3 rounds
+                            displayMessage('Congratulations! You Win!', 2000, () => {
+                                alert("You've completed all rounds! Final score: " + totalScore);
+                                window.location.href = "BananaAPIgame.html";
+                            });
+                        }
+                    }
+                }
+            }, 1000);
+        }
+
+        function displayMessage(message, duration, callback) {
+            // Create overlay with message
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(message, canvas.width/2, canvas.height/2);
+            ctx.textAlign = 'start'; // Reset text alignment
+            
+            if (callback) {
+                setTimeout(callback, duration);
+            }
+        }
+
+        function loseLife() {
+            lives--;
+            updateLivesDisplay();
+        }
+
+        function updateLivesDisplay() {
+            const livesDisplay = document.getElementById('lives');
+            livesDisplay.innerHTML = '';
+            
+            if (useHeartSymbol) {
+                // Use heart emoji if images don't load
+                livesDisplay.textContent = heartSymbol.repeat(lives);
+            } else {
+                // Use heart images
+                for (let i = 0; i < lives; i++) {
+                    const heartImg = document.createElement('img');
+                    heartImg.src = heartImageSrc;
+                    heartImg.alt = "Heart";
+                    livesDisplay.appendChild(heartImg);
+                }
+            }
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('userScore').textContent = totalScore;
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (!gameRunning) return;
+            
+            if (event.key === 'ArrowLeft' && monkey.x > 0) monkey.x -= 20;
+            if (event.key === 'ArrowRight' && monkey.x < canvas.width - monkey.width) monkey.x += 20;
+        });
+
+        function toggleMusic() {
+            let music = document.getElementById('bgMusic');
+            if (music.paused) music.play();
+            else music.pause();
+        }
+
+        function monkeyJump() {
+            document.querySelector('.monkey').classList.add('jump');
+            setTimeout(() => {
+                document.querySelector('.monkey').classList.remove('jump');
+            }, 500);
+        }
+
+        function navigateToMathGame() {
+            window.location.href = "BananaAPIgame.html";
+        }
+    </script>
 </body>
 </html>
