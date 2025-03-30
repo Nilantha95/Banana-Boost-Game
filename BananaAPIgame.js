@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next-button');
     const timerDisplay = document.getElementById('timer');
     const backButton = document.getElementById('back-button');
+    const currentHeartsDisplay = document.getElementById('current-hearts');
 
     let correctSolution;
     let timeLeft;
@@ -34,11 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    function updateHeartDisplay() {
+        let currentLives = parseInt(localStorage.getItem('playerLives')) || 0;
+        currentHeartsDisplay.textContent = currentLives;
+    }
+
+    function incrementLives() {
+        let currentLives = parseInt(localStorage.getItem('playerLives')) || 0;
+        if (currentLives < 3) {
+            localStorage.setItem('playerLives', (currentLives + 1).toString());
+        }
+    }
+
     function checkAnswer() {
         const userAnswer = parseInt(answerInput.value);
         if (userAnswer === correctSolution) {
             feedback.textContent = 'Correct! 🎉';
             feedback.style.color = 'green';
+            incrementLives();
+            updateHeartDisplay();
         } else {
             feedback.textContent = 'Incorrect. Try again!';
             feedback.style.color = 'red';
@@ -46,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function startTimer() {
-        timeLeft = 10;
+        timeLeft = 25;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
@@ -62,10 +77,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     fetchPuzzle();
+    updateHeartDisplay();
 
     checkButton.addEventListener('click', checkAnswer);
     nextButton.addEventListener('click', fetchPuzzle);
     backButton.addEventListener('click', function() {
-        window.location.href = 'MainGUI.html';
+        window.location.href = 'startgame.html';
+    });
+
+    // Heading animation
+    const headingCharacters = document.querySelectorAll('.heading-character');
+    const animationDelay = 150;
+
+    headingCharacters.forEach((char, index) => {
+        setTimeout(() => {
+            char.classList.add('visible');
+        }, index * animationDelay);
     });
 });
