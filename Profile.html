@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile - Banana Catch Game</title>
+    <link rel="stylesheet" href="Profile.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h1 class="profile-heading">Player Profile</h1>
+
+        <div class="profile-info">
+            <div class="profile-avatar">
+                <img src="Imagefiles_Interface/default-avatar.png" alt="Player Avatar">
+            </div>
+            <div class="profile-details">
+                <div class="detail-row">
+                    <label for="email">Email:</label>
+                    <span id="email">player@example.com</span>
+                </div>
+                <div class="detail-row">
+                    <label for="nickname">Nickname:</label>
+                    <span id="nickname">BananaMaster</span>
+                    <button id="editNickname">Edit</button>
+                    <input type="text" id="nicknameInput" style="display: none;">
+                    <button id="saveNickname" style="display: none;">Save</button>
+                </div>
+                <div class="detail-row">
+                    <label for="highestScore">Highest Score:</label>
+                    <span id="highestScore">2500</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="profile-button back-button">Back to Menu</button>
+            <button class="profile-button play-again-button">Play Again</button>
+        </div>
+    </div>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="Music/Menu_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="Profile.js"></script>
+</body>
+</html>
