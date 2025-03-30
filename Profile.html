@@ -7,67 +7,65 @@
     <link rel="stylesheet" href="Profile.css">
 </head>
 <body>
-    <h1 class="profile-heading" id="gameHeading">
-        <span class="heading-character">W</span>
-        <span class="heading-character">e</span>
-        <span class="heading-character">l</span>
-        <span class="heading-character">c</span>
-        <span class="heading-character">o</span>
-        <span class="heading-character">m</span>
-        <span class="heading-character">e</span>
-        <span class="heading-character">&nbsp;</span>
-        <span class="heading-character">t</span>
-        <span class="heading-character">o</span>
-        <span class="heading-character">&nbsp;</span>
-        <span class="heading-character">Y</span>
-        <span class="heading-character">o</span>
-        <span class="heading-character">u</span>
-        <span class="heading-character">r</span>
-        <span class="heading-character">&nbsp;</span>
-        <span class="heading-character">P</span>
-        <span class="heading-character">r</span>
-        <span class="heading-character">o</span>
-        <span class="heading-character">f</span>
-        <span class="heading-character">i</span>
-        <span class="heading-character">l</span>
-        <span class="heading-character">e</span>
-    </h1>
-    <div class="profile-container">
+    <div class="game-container">
+        <h1 class="game-heading" id="gameHeading">
+            <span class="heading-character">U</span>
+            <span class="heading-character">s</span>
+            <span class="heading-character">e</span>
+            <span class="heading-character">r</span>
+            <span class="heading-character">&nbsp;</span>
+            <span class="heading-character">P</span>
+            <span class="heading-character">r</span>
+            <span class="heading-character">o</span>
+            <span class="heading-character">f</span>
+            <span class="heading-character">i</span>
+            <span class="heading-character">l</span>
+            <span class="heading-character">e</span>
+        </h1>
+        <div class="profile-container">
 
-        <div class="profile-info">
-            <div class="profile-avatar">
-                <img src="Imagefiles_Interface/default-avatar.png" alt="Player Avatar">
-            </div>
-            <div class="profile-details">
-                <div class="detail-row">
-                    <label for="email">Email:</label>
-                    <span id="email">player@example.com</span>
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <button id="uploadButton">Upload Photo</button>
                 </div>
-                <div class="detail-row">
-                    <label for="nickname">Nickname:</label>
-                    <span id="nickname">BananaMaster</span>
-                    <button id="editNickname">Edit</button>
-                    <input type="text" id="nicknameInput" style="display: none;">
-                    <button id="saveNickname" style="display: none;">Save</button>
-                </div>
-                <div class="detail-row">
-                    <label for="highestScore">Highest Score:</label>
-                    <span id="highestScore">2500</span>
+                <div class="profile-details">
+                    <div class="detail-row">
+                        <label for="email">Email:</label>
+                        <span id="email">Loading...</span>
+                    </div>
+                    <div class="detail-row">
+                        <label for="nickname">Nickname:</label>
+                        <span id="nickname">Loading...</span>
+                        <button id="editNickname">Edit</button>
+                        <input type="text" id="nicknameInput" style="display: none;">
+                        <button id="saveNickname" style="display: none;">Save</button>
+                    </div>
+                    <div class="detail-row">
+                        <label for="highestScore">Highest Score:</label>
+                        <span id="highestScore">Loading...</span>
+                    </div>
+                    <div class="detail-row">
+                        <label for="totalScore">Total Score:</label>
+                        <span id="totalScore">Loading...</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="button-container">
-            <button class="profile-button back-button">Back to Menu</button>
-            <button class="profile-button play-again-button">Play Again</button>
+            <div class="button-container">
+                <button class="profile-button back-button">Back to Menu</button>
+                <button class="profile-button play-again-button">Play Again</button>
+            </div>
         </div>
+        
+        <audio id="backgroundMusic" loop>
+            <source src="Music/Menu_music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
-    
-    <audio id="backgroundMusic" loop>
-        <source src="Music/Menu_music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="Profile.js"></script>
 </body>
 </html>
