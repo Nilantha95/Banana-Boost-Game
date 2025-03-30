@@ -45,7 +45,7 @@
             width: 800px;
             height: 500px;
             margin: 0 auto 0 0;
-            margin-left: 110px;
+            margin-left: 90px;
         }
 
         .life-display {
@@ -78,7 +78,7 @@
             position: absolute;
             width: 100px;
             height: 100px;
-            background: url('monkey.png') no-repeat center center / contain;
+            background: url('Images/monkey.png') no-repeat center center / contain;
             left: 50px;
             top: 80%;
             transition: top 0.5s ease-in-out;
@@ -94,10 +94,64 @@
             50% { transform: translateY(-50px); }
             100% { transform: translateY(0); }
         }
+
+        .game-heading {
+            position: relative;
+            font-size: 36px;
+            font-weight: bold;
+            color: #180e07;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            z-index: 3;
+            text-align: center;
+            padding: 15px 20px;
+            background-color: rgba(221, 214, 7, 0.8);
+            border-radius: 15px;
+            border: 3px solid #7b3f00;
+            /* Adjust this width value to make the box shorter */
+            width: fit-content; /* or use a specific pixel width, e.g., 500px */
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+
+        .heading-character {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .heading-character.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <h1>Monkey Catch Game</h1>
+    <h1 class="game-heading" id="gameHeading">
+        <span class="heading-character">M</span>
+        <span class="heading-character">o</span>
+        <span class="heading-character">n</span>
+        <span class="heading-character">k</span>
+        <span class="heading-character">e</span>
+        <span class="heading-character">y</span>
+        <span class="heading-character">&nbsp;</span>
+        <span class="heading-character">C</span>
+        <span class="heading-character">a</span>
+        <span class="heading-character">t</span>
+        <span class="heading-character">c</span>
+        <span class="heading-character">h</span>
+        <span class="heading-character">&nbsp;</span>
+        <span class="heading-character">G</span>
+        <span class="heading-character">a</span>
+        <span class="heading-character">m</span>
+        <span class="heading-character">e</span>
+    </h1>
+
     <button class="button play-btn" onclick="startGame()">Play</button>
     <button class="button mute-btn" onclick="toggleMusic()">Mute Music</button>
 
@@ -139,7 +193,7 @@
         let currentRound = 1;
         let bananaSpeed = 5;
         let bananaSpawnRate = 0.05;
-        
+
         // Round settings
         const rounds = [
             { time: 15, target: 50, speed: 5, spawnRate: 0.05 },
@@ -157,12 +211,12 @@
         let heartImage = new Image();
         heartImage.src = heartImageSrc;
         let useHeartSymbol = false;
-        
+
         heartImage.onerror = function() {
             useHeartSymbol = true;
             updateLivesDisplay();
         };
-        
+
         // Initialize the game when page loads
         window.onload = function() {
             updateLivesDisplay();
@@ -172,24 +226,24 @@
 
         function startGame() {
             if (timer) clearInterval(timer);
-            
+
             gameRunning = true;
             bananas = [];
             score = 0;
-            
+
             // Only reset lives and round if starting a new game after game over
             if (lives <= 0) {
                 lives = 3;
                 currentRound = 1;
                 totalScore = 0;
             }
-            
+
             // Set difficulty based on current round
             const roundSettings = rounds[currentRound - 1];
             timeRemaining = roundSettings.time;
             bananaSpeed = roundSettings.speed;
             bananaSpawnRate = roundSettings.spawnRate;
-            
+
             updateScoreDisplay();
             updateLivesDisplay();
             updateRoundDisplay();
@@ -204,7 +258,7 @@
 
         function updateGame() {
             if (!gameRunning) return;
-            
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(monkeyImage, monkey.x, monkey.y, monkey.width, monkey.height);
 
@@ -216,13 +270,13 @@
             bananas.forEach((banana, index) => {
                 banana.y += bananaSpeed; // Use round-specific speed
                 ctx.drawImage(bananaImage, banana.x, banana.y, banana.width, banana.height);
-                
+
                 // Remove bananas that fall off the bottom
                 if (banana.y > canvas.height) {
                     bananas.splice(index, 1);
                     return;
                 }
-                
+
                 // Check for collision
                 if (
                     banana.x < monkey.x + monkey.width &&
@@ -245,7 +299,7 @@
             ctx.fillText('Target: ' + rounds[currentRound - 1].target, 20, 90);
             ctx.fillText('Current: ' + score, 20, 120);
             ctx.fillText('Total: ' + totalScore, 20, 150);
-            
+
             if (gameRunning) {
                 requestAnimationFrame(updateGame);
             }
@@ -253,29 +307,29 @@
 
         function startTimer() {
             if (timer) clearInterval(timer);
-            
+
             const roundSettings = rounds[currentRound - 1];
             timeRemaining = roundSettings.time;
-            
+
             timer = setInterval(() => {
                 timeRemaining--;
-                
+
                 if (timeRemaining <= 0) {
                     clearInterval(timer);
                     gameRunning = false; // Stop the game
-                    
+
                     console.log("Time's up! Round:", currentRound, "Score:", score, "Total:", totalScore);
-                    
+
                     // Check if player met the target for this round
                     const targetScore = rounds[currentRound - 1].target;
-                    
+
                     if (totalScore < targetScore) {
                         console.log("Did not meet target score, losing a life. Lives before:", lives);
-                        
+
                         loseLife();
-                        
+
                         console.log("Lives after reduction:", lives);
-                        
+
                         if (lives > 0) {
                             // Show message and restart the same round after delay
                             displayMessage(`Time's up! Target not met. -1 Life`, 2000, () => {
@@ -316,7 +370,7 @@
             ctx.textAlign = 'center';
             ctx.fillText(message, canvas.width/2, canvas.height/2);
             ctx.textAlign = 'start'; // Reset text alignment
-            
+
             if (callback) {
                 setTimeout(callback, duration);
             }
@@ -330,7 +384,7 @@
         function updateLivesDisplay() {
             const livesDisplay = document.getElementById('lives');
             livesDisplay.innerHTML = '';
-            
+
             if (useHeartSymbol) {
                 // Use heart emoji if images don't load
                 livesDisplay.textContent = heartSymbol.repeat(lives);
@@ -351,7 +405,7 @@
 
         document.addEventListener('keydown', (event) => {
             if (!gameRunning) return;
-            
+
             if (event.key === 'ArrowLeft' && monkey.x > 0) monkey.x -= 20;
             if (event.key === 'ArrowRight' && monkey.x < canvas.width - monkey.width) monkey.x += 20;
         });
@@ -372,6 +426,17 @@
         function navigateToMathGame() {
             window.location.href = "BananaAPIgame.html";
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const headingCharacters = document.querySelectorAll('.heading-character');
+            const animationDelay = 150;
+
+            headingCharacters.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('visible');
+                }, index * animationDelay);
+            });
+        });
     </script>
 </body>
 </html>
