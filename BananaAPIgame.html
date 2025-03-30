@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banana Catch Game</title>
+    <link rel="stylesheet" type="text/css" href="BananaAPIgame.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="game-heading" id="gameHeading">
+            <span class="heading-character">M</span>
+            <span class="heading-character">o</span>
+            <span class="heading-character">n</span>
+            <span class="heading-character">k</span>
+            <span class="heading-character">e</span>
+            <span class="heading-character">y</span>
+            <span class="heading-character">&nbsp;</span>
+            <span class="heading-character">C</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">t</span>
+            <span class="heading-character">c</span>
+            <span class="heading-character">h</span>
+            <span class="heading-character">&nbsp;</span>
+            <span class="heading-character">G</span>
+            <span class="heading-character">a</span>
+            <span class="heading-character">m</span>
+            <span class="heading-character">e</span>
+        </h1>
+    </div>
+    <div class="container">
+        <div class="content">
+            <img id="puzzle-image" src="" alt="Puzzle Image">
+            <p id="quiz-text">Solve the puzzle shown in the image!</p>
+            <input type="text" id="answer-input" placeholder="Enter Answer">
+            <button id="check-button">Check</button>
+            <p id="feedback"></p>
+            <button id="next-button">Next Question</button>
+            <p id="timer">Time left: 10s</p>
+            <button id="back-button">Go Back</button>
+            <div id="heart-display">
+                <p>Hearts: <span id="current-hearts">0</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="BananaAPIgame.js"></script>
+</body>
+</html>
