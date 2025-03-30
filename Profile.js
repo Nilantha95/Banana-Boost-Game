@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Animation for the heading
+    const headingCharacters = document.querySelectorAll('.heading-character');
+    const animationDelay = 150; // milliseconds between each character
+
+    headingCharacters.forEach((char, index) => {
+        setTimeout(() => {
+            char.classList.add('visible');
+        }, index * animationDelay);
+    });
+
+    // ... (rest of the JavaScript remains the same) ...
     const editNicknameButton = document.getElementById('editNickname');
     const nicknameSpan = document.getElementById('nickname');
     const nicknameInput = document.getElementById('nicknameInput');

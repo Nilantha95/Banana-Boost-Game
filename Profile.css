@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column; /* Changed to column layout */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -21,13 +22,14 @@ body {
     width: 90%;
     max-width: 600px;
     text-align: center;
+    margin-top: 20px; /* Added margin to separate from heading */
 }
 
 .profile-heading {
     font-size: 36px;
     font-weight: bold;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* Reduced margin */
     background-color: rgba(221, 214, 7, 0.8);
     padding: 15px 20px;
     border-radius: 15px;
@@ -154,4 +156,18 @@ body {
     .detail-row label{
         min-width: 90px;
     }
+}
+
+/* ... (rest of the CSS remains the same) ... */
+
+.heading-character {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.heading-character.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
