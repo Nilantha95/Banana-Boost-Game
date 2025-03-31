@@ -30,36 +30,38 @@
         
         <div class="leaves">
             <div class="top-leaves">
-                <!-- Green leaves at the top would be images here -->
-            </div>
+                </div>
             <div class="bottom-leaves">
-                <!-- Green leaves at the bottom would be images here -->
-            </div>
+                </div>
         </div>
         
         <div class="monkey-frame">
             <div class="monkey-character">
-                <!-- This div would have the monkey character as a background image -->
-            </div>
+                </div>
     
-    <div class="container">
-        <h2>Sign In</h2>
-        <form id="signInForm">
-            <input type="email" id="email" placeholder="Enter your email" required>
-            <input type="password" id="password" placeholder="Enter your password" required>
-            <div id="errorMessage" class="error-message"></div>
-            <div class="button-container">
-                <button type="submit" class="small-button">Sign In</button>
-                <button type="button" onclick="location.href='Registerform.html'" class="small-button">Register</button>
+            <div class="container">
+                <h2>Sign In</h2>
+                <form id="signInForm">
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <div id="errorMessage" class="error-message"></div>
+                    <div class="button-container">
+                        <button type="submit" class="small-button">Sign In</button>
+                        <button type="button" onclick="location.href='Registerform.html'" class="small-button">Register</button>
+                    </div>
+                </form>
+                <button class="google-signin-button" id="googleSignIn">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo"/>
+                    Sign in with Google
+                </button>
             </div>
-        </form>
+        </div>
     </div>
 
-    <!-- Firebase SDK scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <!-- Your custom script -->
     <script src="SignIn.js"></script>
 </body>
 </html>

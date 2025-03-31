@@ -13,6 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the auth service
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', function() {
     // Get the form element
@@ -73,6 +74,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
     });
+
+    // Google Sign-In
+const googleSignInButton = document.getElementById('googleSignIn');
+googleSignInButton.addEventListener('click', function() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+        .then((result) => {
+            // Signed in with Google successfully.
+            const user = result.user;
+            console.log("User signed in with Google:", user.uid);
+
+            // Create or update user document in Firestore
+            db.collection('players').doc(user.uid).set({
+                email: user.email,
+                highScore: 0, // Initial high score
+                nickname: user.displayName,
+                score: 0 // Initial score
+            }, { merge: true }) // Merge to prevent overwriting existing data
+            .then(() => {
+                console.log("User document created/updated in Firestore.");
+                window.location.href = 'GameInterface.html';
+            })
+            .catch((error) => {
+                console.error("Error creating/updating user document:", error);
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = "Error saving user data. Please try again.";
+            });
+        })
+        .catch((error) => {
+            // Handle errors.
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = error.message;
+            console.error("Error during Google sign in:", error);
+        });
+});
 });
 
 // Animate the heading with letters appearing one by one

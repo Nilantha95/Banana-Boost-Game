@@ -232,6 +232,7 @@
             } else {
                 musicButton.textContent = "Mute Music";
             }
+            updatePlayerName();
         };
 
         function getLivesFromStorage() {
@@ -284,7 +285,7 @@
                     const currentHighScore = doc.data().highScore || 0;
                     const previousScore = doc.data().score || 0;
 
-                    const updatedScore = previousScore + totalScore;
+                    const updatedScore = previousScore + gameScore;
 
                     db.collection('players').doc(userId).update({
                         score: updatedScore,
@@ -305,7 +306,7 @@
                     }
                 } else {
                     db.collection('players').doc(userId).set({
-                        score: totalScore,
+                        score: gameScore,
                         highScore: gameScore,
                         email: auth.currentUser.email,
                         nickname: auth.currentUser.displayName,
@@ -409,6 +410,9 @@
                                 startGame();
                             });
                         } else {
+                            if (user){
+                                saveScoreToFirestore(user.uid, totalScore);
+                            }
                             displayMessage('Congratulations! You Win!', 2000, () => {
                                 alert("You've completed all rounds! Final score: " + totalScore);
                                 window.location.href = "GameInterface.html";
@@ -514,6 +518,26 @@
                 }, index * animationDelay);
             });
         });
+
+        function updatePlayerName() {
+            const user = auth.currentUser;
+            if (user) {
+                db.collection('players').doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const nickname = doc.data().nickname || user.displayName || "Player";
+                        document.getElementById('playerName').textContent = `Name: ${nickname}`;
+                    } else {
+                        document.getElementById('playerName').textContent = `Name: ${user.displayName || "Player"}`;
+                    }
+                }).catch((error) => {
+                    console.error("Error getting player nickname:", error);
+                    document.getElementById('playerName').textContent = `Name: ${user.displayName || "Player"}`;
+                });
+            } else {
+                document.getElementById('playerName').textContent = "Name: Guest";
+            }
+        }
+
     </script>
 </body>
 </html>

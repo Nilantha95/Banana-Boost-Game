@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Firebase configuration
+    
     const firebaseConfig = {
         apiKey: "AIzaSyBdPV7jw9_AHGoTrKd2l1H5H_hMlyYIftw",
         authDomain: "fruit-game-e8918.firebaseapp.com",
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animation for the heading
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; // milliseconds between each character
+    const animationDelay = 150;
 
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {
@@ -97,21 +97,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     playAgainButton.addEventListener('click', function() {
         window.location.href = 'StartGame.html';
-    });
-
-    uploadButton.addEventListener('click', function() {
-        imageUpload.click(); // Trigger file selection
-    });
-
-    imageUpload.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                profileImage.src = e.target.result; // Set the image source
-                //you can also save the data URL to firebase storage here.
-            };
-            reader.readAsDataURL(file);
-        }
     });
 });
