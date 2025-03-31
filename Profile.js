@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     playAgainButton.addEventListener('click', function() {
-        window.location.href = 'game.html';
+        window.location.href = 'StartGame.html';
     });
 
     uploadButton.addEventListener('click', function() {

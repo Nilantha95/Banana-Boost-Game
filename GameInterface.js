@@ -3,6 +3,7 @@ const musicButton = document.getElementById('musicButton');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const quitButton = document.querySelector('.quit-button');
 const leaderboardButton = document.querySelector('.leaderboard-button');
+const profileButton = document.querySelector('.about-button');
 
 
 // Initialize music state
@@ -42,6 +43,12 @@ leaderboardButton.addEventListener('click', function() {
 quitButton.addEventListener('click', function() {
     // Navigate to the signin page
     window.location.href = 'signin.html';
+});
+
+// Add click event listener to profile button
+profileButton.addEventListener('click', function() {
+    // Navigate to the profile page
+    window.location.href = 'profile.html'; // Replace 'profile.html' with your profile page's filename
 });
 
 // Animate the heading with letters appearing one by one

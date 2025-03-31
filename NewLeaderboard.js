@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(playAgainButton) {
         playAgainButton.addEventListener('click', function() {
-            window.location.href = 'game.html';
+            window.location.href = 'StartGame.html';
         });
     }
 

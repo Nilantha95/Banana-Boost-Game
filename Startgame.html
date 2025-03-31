@@ -67,6 +67,8 @@
         .play-btn { background-color: #ff4081; color: white; }
         .play-btn:hover { background-color: #e91e63; }
         .mute-btn { background-color: yellow; }
+        .back-btn { background-color: #4CAF50; color: white; }
+        .back-btn:hover { background-color: #45a049; }
 
         .monkey {
             position: absolute;
@@ -146,6 +148,7 @@
 
     <button class="button play-btn" onclick="startGame()">Play</button>
     <button class="button mute-btn" onclick="toggleMusic()">Mute Music</button>
+    <button class="button back-btn" onclick="navigateToMain()">Back</button>
 
     <div class="game-container">
         <div class="user-profile">
@@ -157,6 +160,7 @@
             <p>Score: <span id="userScore">0</span></p>
             <p>Round: <span id="roundNumber">1</span>/3</p>
             <p>Target: <span id="targetScore">50</span></p>
+            <p>High Score: <span id="highScoreDisplay">0</span></p>
         </div>
         <canvas id="gameCanvas" width="800" height="500"></canvas>
     </div>
@@ -221,6 +225,13 @@
             updateLivesDisplay();
             updateScoreDisplay();
             updateRoundDisplay();
+            let music = document.getElementById('bgMusic');
+            let musicButton = document.querySelector('.mute-btn');
+            if (music.paused) {
+                musicButton.textContent = "Play Music";
+            } else {
+                musicButton.textContent = "Mute Music";
+            }
         };
 
         function getLivesFromStorage() {
@@ -262,7 +273,7 @@
             requestAnimationFrame(updateGame);
         }
 
-        function saveScoreToFirestore(userId, score) {
+        function saveScoreToFirestore(userId, gameScore) {
             if (!userId) {
                 console.error("User ID is undefined. Cannot save score.");
                 return;
@@ -270,11 +281,22 @@
 
             db.collection('players').doc(userId).get().then((doc) => {
                 if (doc.exists) {
-                    const currentHighScore = doc.data().score || 0;
+                    const currentHighScore = doc.data().highScore || 0;
+                    const previousScore = doc.data().score || 0;
 
-                    if (score > currentHighScore) {
+                    const updatedScore = previousScore + totalScore;
+
+                    db.collection('players').doc(userId).update({
+                        score: updatedScore,
+                    }).then(() => {
+                        console.log("Accumulated score updated!");
+                    }).catch((error) => {
+                        console.error("Error updating accumulated score:", error);
+                    });
+
+                    if (gameScore > currentHighScore) {
                         db.collection('players').doc(userId).update({
-                            score: score,
+                            highScore: gameScore,
                         }).then(() => {
                             console.log("High score successfully updated!");
                         }).catch((error) => {
@@ -283,11 +305,14 @@
                     }
                 } else {
                     db.collection('players').doc(userId).set({
-                        score: score,
+                        score: totalScore,
+                        highScore: gameScore,
+                        email: auth.currentUser.email,
+                        nickname: auth.currentUser.displayName,
                     }).then(() => {
-                        console.log("High score successfully set!");
+                        console.log("Scores successfully set for new player!");
                     }).catch((error) => {
-                        console.error("Error setting high score:", error);
+                        console.error("Error setting scores for new player:", error);
                     });
                 }
             }).catch((error) => {
@@ -329,12 +354,6 @@
                     score++;
                     totalScore++;
                     updateScoreDisplay();
-                    const user = auth.currentUser;
-                    if (user) {
-                        saveScoreToFirestore(user.uid, totalScore);
-                    } else {
-                        console.error("User not logged in. Score not saved.");
-                    }
                 }
             });
 
@@ -380,7 +399,11 @@
                             });
                         }
                     } else {
+                        const user = auth.currentUser;
                         if (currentRound < 3) {
+                            if (user){
+                                saveScoreToFirestore(user.uid, totalScore);
+                            }
                             currentRound++;
                             displayMessage(`Round ${currentRound-1} Complete!`, 2000, () => {
                                 startGame();
@@ -388,7 +411,7 @@
                         } else {
                             displayMessage('Congratulations! You Win!', 2000, () => {
                                 alert("You've completed all rounds! Final score: " + totalScore);
-                                window.location.href = "BananaAPIgame.html";
+                                window.location.href = "GameInterface.html";
                             });
                         }
                     }
@@ -431,6 +454,22 @@
 
         function updateScoreDisplay() {
             document.getElementById('userScore').textContent = totalScore;
+            const user = auth.currentUser;
+            if (user) {
+                db.collection('players').doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const highScore = doc.data().highScore || 0;
+                        document.getElementById('highScoreDisplay').textContent = highScore;
+                    } else {
+                        document.getElementById('highScoreDisplay').textContent = "0";
+                    }
+                }).catch((error) => {
+                    console.error("Error getting high score:", error);
+                    document.getElementById('highScoreDisplay').textContent = "Error";
+                });
+            } else {
+                document.getElementById('highScoreDisplay').textContent = "Login to see";
+            }
         }
 
         document.addEventListener('keydown', (event) => {
@@ -442,14 +481,15 @@
 
         function toggleMusic() {
             let music = document.getElementById('bgMusic');
-            music.paused ? music.play() : music.pause();
-        }
+            let musicButton = document.querySelector('.mute-btn');
 
-        function monkeyJump() {
-            document.querySelector('.monkey').classList.add('jump');
-            setTimeout(() => {
-                document.querySelector('.monkey').classList.remove('jump');
-            }, 500);
+            if (music.paused) {
+                music.play();
+                musicButton.textContent = "Mute Music";
+            } else {
+                music.pause();
+                musicButton.textContent = "Play Music";
+            }
         }
 
         function navigateToMathGame() {
@@ -458,6 +498,10 @@
                 saveScoreToFirestore(user.uid, totalScore);
             }
             window.location.href = "BananaAPIgame.html";
+        }
+
+        function navigateToMain() {
+            window.location.href = "GameInterface.html";
         }
 
         document.addEventListener('DOMContentLoaded', function() {
