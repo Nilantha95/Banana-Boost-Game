@@ -4,6 +4,7 @@ const backgroundMusic = document.getElementById('backgroundMusic');
 const quitButton = document.querySelector('.quit-button');
 const leaderboardButton = document.querySelector('.leaderboard-button');
 const profileButton = document.querySelector('.about-button');
+const playbutton = document.querySelector('.play-button');
 
 
 // Initialize music state
@@ -30,25 +31,24 @@ musicButton.addEventListener('click', function() {
         musicButton.classList.add('muted');
     }
     
-    // Toggle the music state
     isMusicPlaying = !isMusicPlaying;
 });
 
 leaderboardButton.addEventListener('click', function() {
-    // Navigate to the leaderboard page
     window.location.href = 'NewLeaderboard.html';
 });
 
-// Add click event listener to quit button
 quitButton.addEventListener('click', function() {
-    // Navigate to the signin page
     window.location.href = 'signin.html';
 });
 
-// Add click event listener to profile button
+
+playbutton.addEventListener('click', function() {
+    window.location.href = 'StartGame.html'; 
+});
+
 profileButton.addEventListener('click', function() {
-    // Navigate to the profile page
-    window.location.href = 'profile.html'; // Replace 'profile.html' with your profile page's filename
+    window.location.href = 'profile.html';
 });
 
 // Animate the heading with letters appearing one by one
@@ -62,18 +62,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * animationDelay);
     });
     
-    // Make sure the quit button has the event listener (in case DOM loads after the earlier code)
     if (quitButton) {
         quitButton.addEventListener('click', function() {
             window.location.href = 'SignIn.html';
         });
     }
 });
-// Animate the heading with letters appearing one by one
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; // milliseconds between each character
-
+    const animationDelay = 150; 
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {
             char.classList.add('visible');
