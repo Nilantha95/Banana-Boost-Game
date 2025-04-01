@@ -8,12 +8,12 @@
 </head>
 <body>
     <h1 class="game-heading" id="gameHeading">
-        <span class="heading-character">M</span>
-        <span class="heading-character">o</span>
+        <span class="heading-character">B</span>
+        <span class="heading-character">a</span>
         <span class="heading-character">n</span>
-        <span class="heading-character">k</span>
-        <span class="heading-character">e</span>
-        <span class="heading-character">y</span>
+        <span class="heading-character">a</span>
+        <span class="heading-character">n</span>
+        <span class="heading-character">a</span>
         <span class="heading-character">&nbsp;</span>
         <span class="heading-character">C</span>
         <span class="heading-character">a</span>
@@ -29,7 +29,7 @@
 
     <button class="button play-btn" onclick="startGame()">Play</button>
     <button class="button mute-btn" onclick="toggleMusic()">Mute Music</button>
-    <button class="button back-btn" onclick="navigateToMain()">Back</button>
+    <button class="button back-btn" onclick="navigateToMain()">Back To Menu</button>
 
     <div class="game-container">
         <div class="user-profile">
@@ -46,7 +46,6 @@
         <canvas id="gameCanvas" width="800" height="500"></canvas>
     </div>
 
-    <div class="monkey" onclick="monkeyJump()"></div>
     <audio id="bgMusic" loop>
         <source src="Music/Menu_music.mp3" type="audio/mpeg">
     </audio>
@@ -58,6 +57,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script src="Startgame.js"></script>
-    
+
 </body>
 </html>

@@ -31,6 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = '';
             
             console.log("Attempting to register user:", email, "with nickname:", nickname);
+
+            // Password strength validation
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
+            if (!passwordRegex.test(password)) {
+                errorMessage.textContent = "Password must be at least 10 characters long and include uppercase, lowercase, numbers, and special characters.";
+                return; // Stop the registration process
+            }
             
             // Create user with email and password
             auth.createUserWithEmailAndPassword(email, password)
@@ -43,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const playerData = {
                         nickname: nickname,
                         email: email,
-                        
                     };
                     
                     console.log("Attempting to save player data:", playerData);

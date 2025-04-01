@@ -30,10 +30,11 @@ let playerName = "Player 1";
 let currentRound = 1;
 let bananaSpeed = 5;
 let bananaSpawnRate = 0.05;
+let inactivityTimer; // Timer to track inactivity
 
 const rounds = [
-    { time: 15, target: 50, speed: 5, spawnRate: 0.05 },
-    { time: 12, target: 70, speed: 7, spawnRate: 0.07 },
+    { time: 20, target: 50, speed: 5, spawnRate: 0.05 },
+    { time: 15, target: 70, speed: 7, spawnRate: 0.07 },
     { time: 10, target: 100, speed: 9, spawnRate: 0.09 }
 ];
 
@@ -75,6 +76,7 @@ function startGame() {
         return;
     }
     if (timer) clearInterval(timer);
+    clearTimeout(inactivityTimer);
 
     gameRunning = true;
     bananas = [];
@@ -95,6 +97,28 @@ function startGame() {
     updateRoundDisplay();
     startTimer();
     requestAnimationFrame(updateGame);
+
+    // Start inactivity timer when the game starts
+    startInactivityTimer();
+}
+
+function startInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        if (gameRunning) {
+            alert("Inactivity detected. Logging out.");
+            auth.signOut().then(() => {
+                window.location.href = "SignIn.html";
+            });
+        }
+    }, 10000); // 10 seconds
+}
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    if (gameRunning) {
+        startInactivityTimer();
+    }
 }
 
 function saveScoreToFirestore(userId, gameScore) {
@@ -300,6 +324,7 @@ document.addEventListener('keydown', (event) => {
 
     if (event.key === 'ArrowLeft' && monkey.x > 0) monkey.x -= 20;
     if (event.key === 'ArrowRight' && monkey.x < canvas.width - monkey.width) monkey.x += 20;
+    resetInactivityTimer();
 });
 
 function toggleMusic() {
@@ -355,3 +380,5 @@ function updatePlayerName(user) {
         document.getElementById('playerName').textContent = "Name: Guest";
     }
 }
+document.addEventListener('mousemove', resetInactivityTimer);
+document.addEventListener('click', resetInactivityTimer);

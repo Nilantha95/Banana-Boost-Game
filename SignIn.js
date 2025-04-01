@@ -88,9 +88,7 @@ googleSignInButton.addEventListener('click', function() {
             // Create or update user document in Firestore
             db.collection('players').doc(user.uid).set({
                 email: user.email,
-                highScore: 0, // Initial high score
                 nickname: user.displayName,
-                score: 0 // Initial score
             }, { merge: true }) // Merge to prevent overwriting existing data
             .then(() => {
                 console.log("User document created/updated in Firestore.");
