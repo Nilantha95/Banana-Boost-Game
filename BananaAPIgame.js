@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feedback.style.color = 'green';
             incrementLives();
             updateHeartDisplay();
+            fetchPuzzle(); // Load next puzzle immediately on correct answer
         } else {
             feedback.textContent = 'Incorrect. Try again!';
             feedback.style.color = 'red';
@@ -85,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'startgame.html';
     });
 
-    // Heading animation
     const headingCharacters = document.querySelectorAll('.heading-character');
     const animationDelay = 150;
 
