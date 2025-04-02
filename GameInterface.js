@@ -44,7 +44,7 @@ quitButton.addEventListener('click', function() {
 
 
 playbutton.addEventListener('click', function() {
-    window.location.href = 'StartGame.html'; 
+    window.location.href = 'Startgame.html'; 
 });
 
 profileButton.addEventListener('click', function() {
