@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feedback.style.color = 'green';
             incrementLives();
             updateHeartDisplay();
-            fetchPuzzle(); // Load next puzzle immediately on correct answer
+            fetchPuzzle(); // Giving correct answer and fetch next Puzzle
         } else {
             feedback.textContent = 'Incorrect. Try again!';
             feedback.style.color = 'red';
