@@ -39,7 +39,7 @@ leaderboardButton.addEventListener('click', function() {
 });
 
 quitButton.addEventListener('click', function() {
-    window.location.href = 'signin.html';
+    window.location.href = 'SignIn.html';
 });
 
 
@@ -48,7 +48,7 @@ playbutton.addEventListener('click', function() {
 });
 
 profileButton.addEventListener('click', function() {
-    window.location.href = 'profile.html';
+    window.location.href = 'Profile.html';
 });
 
 // Animate the heading with letters appearing one by one
