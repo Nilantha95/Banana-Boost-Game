@@ -1,11 +1,11 @@
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBdPV7jw9_AHGoTrKd2l1H5H_hMlyYIftw",
-    authDomain: "fruit-game-e8918.firebaseapp.com",
-    projectId: "fruit-game-e8918",
-    storageBucket: "fruit-game-e8918.firebasestorage.app",
-    messagingSenderId: "536978157706",
-    appId: "1:536978157706:web:1b63e3a0ebce0a243d3d73"
+    apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
+    authDomain: "new-fruit-game-6c439.firebaseapp.com",
+    projectId: "new-fruit-game-6c439",
+    storageBucket: "new-fruit-game-6c439.firebasestorage.app",
+    messagingSenderId: "551515552268",
+    appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
 };
 
 // Initialize Firebase
