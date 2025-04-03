@@ -1,4 +1,4 @@
-// Use a LLM to get some code parts and Youtube videos to get the rest of the code parts.
+// Used Youtube video https://www.youtube.com/watch?v=cuEtnrL9-H0 to get idea and used LLM to enhance the code.
 
 
 document.addEventListener('DOMContentLoaded', function() {

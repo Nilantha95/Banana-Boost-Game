@@ -10,25 +10,25 @@ const firebaseConfig = {
     appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
 };
 
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the auth service
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the form element
+    
     const signInForm = document.querySelector('form');
     
-    // Add error message element
+    
     const errorDiv = document.createElement('div');
     errorDiv.id = 'errorMessage';
     errorDiv.style.color = 'red';
     errorDiv.style.marginTop = '10px';
     signInForm.appendChild(errorDiv);
     
-    // Add submit event listener to the form
+    // Add submit event listener to the form submit
     signInForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -87,11 +87,11 @@ googleSignInButton.addEventListener('click', function() {
             const user = result.user;
             console.log("User signed in with Google:", user.uid);
 
-            // Create or update user document in Firestore
+            
             db.collection('players').doc(user.uid).set({
                 email: user.email,
                 nickname: user.displayName,
-            }, { merge: true }) // Merge to prevent overwriting existing data
+            }, { merge: true }) 
             .then(() => {
                 console.log("User document created/updated in Firestore.");
                 window.location.href = 'GameInterface.html';

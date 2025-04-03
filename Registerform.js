@@ -1,7 +1,4 @@
 
-
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
     authDomain: "new-fruit-game-6c439.firebaseapp.com",

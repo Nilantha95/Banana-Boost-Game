@@ -53,7 +53,7 @@ profileButton.addEventListener('click', function() {
     window.location.href = 'Profile.html';
 });
 
-
+//Used Youtube to get the code for the animation and edited.https://www.youtube.com/watch?v=qEcXe51-ZTw
 // Animate the heading with letters entering one by one
 document.addEventListener('DOMContentLoaded', function() {
     const headingCharacters = document.querySelectorAll('.heading-character');

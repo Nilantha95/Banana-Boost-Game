@@ -1,7 +1,4 @@
 
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     
     const firebaseConfig = {
@@ -28,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             char.classList.add('visible');
         }, index * animationDelay);
     });
+    
+// Used YouTube video: https://www.youtube.com/watch?v=kjyMta25TMI
 
     const emailSpan = document.getElementById('email');
     const nicknameSpan = document.getElementById('nickname');
@@ -71,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
         saveNicknameButton.style.display = 'inline-block';
         nicknameInput.value = nicknameSpan.textContent;
     });
+
+    // Used stackoverflow to develop edit function.
 
     saveNicknameButton.addEventListener('click', function() {
         const user = auth.currentUser;

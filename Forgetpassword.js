@@ -1,4 +1,6 @@
-// Firebase configuration for get database connectivity
+// Used stackoverflow to develop the forgetpassowrd function and LLM used to edit and enhance the code.
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
     authDomain: "new-fruit-game-6c439.firebaseapp.com",
