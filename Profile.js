@@ -1,3 +1,7 @@
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     
     const firebaseConfig = {
@@ -9,14 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
         appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
     };
 
-    // Initialize Firebase
+    
     firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the auth and firestore services
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Animation for the heading
     const headingCharacters = document.querySelectorAll('.heading-character');
     const animationDelay = 150;
 
@@ -35,10 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveNicknameButton = document.getElementById('saveNickname');
     const backButton = document.querySelector('.back-button');
     const playAgainButton = document.querySelector('.play-again-button');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const profileImage = document.getElementById('profileImage');
-    const uploadButton = document.getElementById('uploadButton');
-    const imageUpload = document.getElementById('imageUpload');
 
     auth.onAuthStateChanged(user => {
         if (user) {

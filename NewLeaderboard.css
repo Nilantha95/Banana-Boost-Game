@@ -19,7 +19,7 @@ body {
     margin: 20px auto;
 }
 
-/* Animated heading styles */
+
 .game-heading {
     position: relative;
     font-size: 36px;
@@ -53,7 +53,8 @@ body {
     transform: translateY(0);
 }
 
-/* Leaderboard container */
+
+
 .leaderboard-container {
     background-color: rgba(103, 58, 183, 0.8);
     border-radius: 20px;
@@ -68,7 +69,8 @@ body {
     width: 100%;
 }
 
-/* Player row styling */
+
+
 .player-row {
     display: flex;
     align-items: center;
@@ -86,7 +88,8 @@ body {
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
-/* Styling for medal positions */
+
+/* Player medal styling */
 .first-place {
     background-color: rgba(157, 114, 237, 0.9);
     border: 2px solid gold;
@@ -105,7 +108,6 @@ body {
     box-shadow: 0 0 8px #cd7f32;
 }
 
-/* Medal styling */
 .medal-container {
     width: 40px;
     height: 40px;
@@ -154,19 +156,7 @@ body {
     border: 2px solid #4a2483;
 }
 
-/* Player avatar */
-.player-avatar {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    border-radius: 50%;
-    margin-right: 15px;
-    background-image: url('Imagefiles_Interface/default-avatar.png');
-    background-size: cover;
-    background-position: center;
-    border: 2px solid #4a2483;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
+
 
 /* Player information */
 .player-info {
@@ -181,7 +171,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* Star rating */
 .star-rating {
     display: flex;
 }
@@ -197,7 +186,7 @@ body {
     text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
 }
 
-/* Score display */
+/* Score display styling */
 .player-score {
     font-size: 24px;
     font-weight: bold;
@@ -211,7 +200,7 @@ body {
     border: 1px solid #362259;
 }
 
-/* Button container */
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -246,7 +235,7 @@ body {
     color: white;
 }
 
-/* Responsive adjustments */
+/* Page responsive part*/
 @media (max-width: 600px) {
     .game-heading {
         font-size: 28px;

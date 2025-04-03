@@ -1,17 +1,17 @@
-// Firebase configuration
+// Firebase configuration for get database connectivity
 const firebaseConfig = {
-    apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw", // Replace with your actual API Key
-    authDomain: "new-fruit-game-6c439.firebaseapp.com", // Replace with your actual Auth Domain
-    projectId: "new-fruit-game-6c439", // Replace with your actual Project ID
-    storageBucket: "new-fruit-game-6c439.firebasestorage.app", // Replace with your actual Storage Bucket
-    messagingSenderId: "551515552268", // Replace with your actual Messaging Sender ID
-    appId: "1:551515552268:web:5a65177cd66989fb0f0c29"  // Replace with your actual App ID
+    apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
+    authDomain: "new-fruit-game-6c439.firebaseapp.com",
+    projectId: "new-fruit-game-6c439",
+    storageBucket: "new-fruit-game-6c439.firebasestorage.app",
+    messagingSenderId: "551515552268",
+    appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
 };
 
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the auth service
+
 const auth = firebase.auth();
 const forgotPasswordForm = document.getElementById('forgotPasswordForm');
 const messageDiv = document.getElementById('message');
@@ -31,9 +31,9 @@ forgotPasswordForm.addEventListener('submit', function(e) {
         });
 });
 
-// Animate the heading with letters appearing one by one
+// Heading animation part
 const headingCharacters = document.querySelectorAll('.heading-character');
-const animationDelay = 150; // milliseconds between each character
+const animationDelay = 150;
 
 headingCharacters.forEach((char, index) => {
     setTimeout(() => {

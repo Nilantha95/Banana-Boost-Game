@@ -1,4 +1,6 @@
-// Get references to DOM elements
+// Used stackoverflow to get the code for interface button integration and LLM to get some codes.
+
+
 const musicButton = document.getElementById('musicButton');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const quitButton = document.querySelector('.quit-button');
@@ -7,10 +9,10 @@ const profileButton = document.querySelector('.about-button');
 const playbutton = document.querySelector('.play-button');
 
 
-// Initialize music state
-let isMusicPlaying = false; // Music starts paused
 
-// Set initial button state
+let isMusicPlaying = false;
+
+
 musicButton.textContent = 'Play Music';
 musicButton.classList.remove('muted');
 
@@ -19,15 +21,15 @@ musicButton.addEventListener('click', function() {
     if (isMusicPlaying) {
         // If music is playing, pause it
         backgroundMusic.pause();
-        musicButton.textContent = 'Play Music'; // Change button text
+        musicButton.textContent = 'Play Music';
         musicButton.classList.remove('muted');
     } else {
-        // If music is paused, play it
+        // If music is playing, running it
         backgroundMusic.play()
         .catch(error => {
             console.error('Error playing audio:', error);
         });
-        musicButton.textContent = 'Mute Music'; // Change button text
+        musicButton.textContent = 'Mute Music';
         musicButton.classList.add('muted');
     }
     
@@ -51,10 +53,11 @@ profileButton.addEventListener('click', function() {
     window.location.href = 'Profile.html';
 });
 
-// Animate the heading with letters appearing one by one
+
+// Animate the heading with letters entering one by one
 document.addEventListener('DOMContentLoaded', function() {
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; // milliseconds between each character
+        const animationDelay = 150;
     
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {
@@ -70,9 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; 
+    const animationDelay = 150;
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {
             char.classList.add('visible');

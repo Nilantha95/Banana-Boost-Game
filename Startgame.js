@@ -1,4 +1,4 @@
-// Firebase configuration and initialization
+
 const firebaseConfig = {
     apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
     authDomain: "new-fruit-game-6c439.firebaseapp.com",
@@ -8,12 +8,12 @@ const firebaseConfig = {
     appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the auth and firestore services
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+// Used LLM to bug fix and do code enhancement.
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
@@ -30,7 +30,7 @@ let playerName = "Player 1";
 let currentRound = 1;
 let bananaSpeed = 5;
 let bananaSpawnRate = 0.05;
-let inactivityTimer; // Timer to track inactivity
+let inactivityTimer;           // Timer to track inactivity 10 seconds
 
 const rounds = [
     { time: 20, target: 50, speed: 5, spawnRate: 0.05 },
@@ -98,9 +98,11 @@ function startGame() {
     startTimer();
     requestAnimationFrame(updateGame);
 
-    // Start inactivity timer when the game starts
     startInactivityTimer();
 }
+
+
+//  Get help from stackoverflow and LLM to develop the code and update.
 
 function startInactivityTimer() {
     clearTimeout(inactivityTimer);
@@ -111,7 +113,7 @@ function startInactivityTimer() {
                 window.location.href = "SignIn.html";
             });
         }
-    }, 10000); // 10 seconds
+    }, 10000); // 10 seconds timer
 }
 
 function resetInactivityTimer() {
@@ -120,6 +122,8 @@ function resetInactivityTimer() {
         startInactivityTimer();
     }
 }
+
+// Used YouTube (https://www.youtube.com/watch?v=NSnbUfG3_NY) to learn how to save score to Firestore and LLM to debug.
 
 function saveScoreToFirestore(userId, gameScore) {
     if (!userId) {

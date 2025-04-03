@@ -1,4 +1,9 @@
+// Used LLM to get help with get coding parts and Medium (https://medium.com/) to get idea how to develop.
+
+
 document.addEventListener('DOMContentLoaded', function() {
+
+
     // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
@@ -9,16 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
         appId: "1:551515552268:web:5a65177cd66989fb0f0c29"
     };
 
-    // Initialize Firebase
+    
+    
     firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the auth and firestore services
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Animate the heading with letters appearing one by one
+    // Animate heading
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; // milliseconds between each character
+    const animationDelay = 150;
 
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {
@@ -29,19 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const leaderboardTable = document.querySelector('.leaderboard-table');
 
     if (leaderboardTable) {
-        leaderboardTable.innerHTML = ''; // Clear existing rows
+        leaderboardTable.innerHTML = '';
     }
 
-    console.log("Starting Firestore query..."); // Debugging log
+    console.log("Starting Firestore query...");
 
     db.collection('players').get().then((querySnapshot) => { // get all the documents.
-        console.log("Firestore query successful:", querySnapshot); // Debugging log
+        console.log("Firestore query successful:", querySnapshot);
         let players = [];
         querySnapshot.forEach((doc) => {
-            console.log("Document data:", doc.data()); // Debugging log
+            console.log("Document data:", doc.data());
             players.push({
-                name: doc.data().name || 'Player', // Use 'Player' as default name
-                score: doc.data().highScore || 0, // if highscore is undefined, then score is 0.
+                name: doc.data().name || 'Player',
+                score: doc.data().highScore || 0,
                 nickname: doc.data().nickname || 'No Nickname' // get nickname from database.
             });
         });
@@ -87,10 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }).catch((error) => {
         console.error("Error fetching leaderboard data:", error);
-        console.log("Firestore error details:", error); // Debugging log
+        console.log("Firestore error details:", error);
     });
 
-    // Setup navigation buttons
+    // Setup addEventListener for back and play again buttons
     const backButton = document.querySelector('.back-button');
     const playAgainButton = document.querySelector('.play-again-button');
 
@@ -106,22 +112,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Background music control (optional)
-    const backgroundMusic = document.getElementById('backgroundMusic');
-
-    // Only if you have a music button on this page
-    const musicButton = document.getElementById('musicButton');
-    if (musicButton) {
-        musicButton.addEventListener('click', function() {
-            if (backgroundMusic.paused) {
-                backgroundMusic.play();
-                musicButton.textContent = 'Mute Music';
-                musicButton.classList.add('muted');
-            } else {
-                backgroundMusic.pause();
-                musicButton.textContent = 'Play Music';
-                musicButton.classList.remove('muted');
-            }
-        });
-    }
 });

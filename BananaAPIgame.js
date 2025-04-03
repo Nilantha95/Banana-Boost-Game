@@ -1,3 +1,6 @@
+// Use a LLM to get some code parts and Youtube videos to get the rest of the code parts.
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const puzzleImage = document.getElementById('puzzle-image');
     const quizText = document.getElementById('quiz-text');
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feedback.style.color = 'green';
             incrementLives();
             updateHeartDisplay();
-            fetchPuzzle(); // Giving correct answer and fetch next Puzzle
+            fetchPuzzle(); // Giving correct answer and fetch to next puzzle
         } else {
             feedback.textContent = 'Incorrect. Try again!';
             feedback.style.color = 'red';

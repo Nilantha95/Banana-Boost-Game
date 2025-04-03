@@ -1,4 +1,6 @@
-// Firebase configuration
+// Used Youtube videos to set google signin (https://www.youtube.com/watch?v=Uhbn1KmiNbg) and LLM to get some code parts.
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyBtgxxTMjm8OXclSEvZTsWbfESD3HyiRNw",
     authDomain: "new-fruit-game-6c439.firebaseapp.com",
@@ -101,7 +103,7 @@ googleSignInButton.addEventListener('click', function() {
             });
         })
         .catch((error) => {
-            // Handle errors.
+            
             const errorMessage = document.getElementById('errorMessage');
             errorMessage.textContent = error.message;
             console.error("Error during Google sign in:", error);
@@ -109,10 +111,10 @@ googleSignInButton.addEventListener('click', function() {
 });
 });
 
-// Animate the heading with letters appearing one by one
+
 document.addEventListener('DOMContentLoaded', function() {
     const headingCharacters = document.querySelectorAll('.heading-character');
-    const animationDelay = 150; // milliseconds between each character
+    const animationDelay = 150;
 
     headingCharacters.forEach((char, index) => {
         setTimeout(() => {

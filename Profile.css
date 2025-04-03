@@ -81,22 +81,6 @@ body {
     margin-bottom: 30px;
 }
 
-.profile-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #7b3f00;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px; /* added space between avatar and details */
-}
-
-.profile-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .profile-details {
     text-align: left;
     flex-grow: 1;
@@ -175,6 +159,7 @@ body {
     color: white;
 }
 
+/* Responsive styles */
 @media (max-width: 600px) {
     .profile-heading {
         font-size: 28px;
