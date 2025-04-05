@@ -104,6 +104,8 @@ function startGame() {
 
 //  Get help from stackoverflow and LLM to develop the code and update.
 
+
+// Inactivity Timer - 10 seconds
 function startInactivityTimer() {
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
@@ -303,6 +305,7 @@ function updateLivesDisplay() {
     livesDisplay.textContent = heartSymbol.repeat(lives);
 }
 
+// High Score Display
 function updateScoreDisplay() {
     document.getElementById('userScore').textContent = totalScore;
     const user = auth.currentUser;
