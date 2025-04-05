@@ -331,7 +331,7 @@ document.addEventListener('keydown', (event) => {
 
     if (event.key === 'ArrowLeft' && monkey.x > 0) monkey.x -= 20;
     if (event.key === 'ArrowRight' && monkey.x < canvas.width - monkey.width) monkey.x += 20;
-    resetInactivityTimer();
+    resetInactivityTimer(); // Reset inactivity timer on key press
 });
 
 function toggleMusic() {
