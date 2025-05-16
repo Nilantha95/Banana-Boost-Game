@@ -2,7 +2,7 @@
 
 
 const musicButton = document.getElementById('musicButton');
-const backgroundMusic = document.getElementById('backgroundMusic');
+const backgroundMusic = ocument.getElementById('backgroundMusic');
 const quitButton = document.querySelector('.quit-button');
 const leaderboardButton = document.querySelector('.leaderboard-button');
 const profileButton = document.querySelector('.about-button');
